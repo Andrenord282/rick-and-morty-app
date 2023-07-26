@@ -15,7 +15,10 @@ const Header = () => {
             <div className="container header__container">
                 <div className="header__content">
                     <Link to={'/'} className="header__link">
-                        <img src={headerLogo} className="header__logo" alt="" />
+                        <img
+                            className="header__logo"
+                            src={headerLogo}
+                            alt="" />
                     </Link>
                 </div>
             </div>

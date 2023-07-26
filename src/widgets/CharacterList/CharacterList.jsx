@@ -11,7 +11,7 @@ import { useCharacterListController } from "controllers";
 import { useSelector } from "react-redux";
 
 //-----selectors-----//
-import { selectCharacters } from "store/characterListSlice";
+import { selectCharacterListStatus, selectNumberCurremtPage, selectCharacters, } from "store/characterListSlice";
 
 //-----features-----//
 import CharacterListPagination from "features/CharacterListPagination";
@@ -25,24 +25,32 @@ import './CharacterList.scss';
 
 const CharacterList = (props) => {
     const { classes } = props;
+    const characterListStatus = useSelector(selectCharacterListStatus);
+    const numberCurrentPage = useSelector(selectNumberCurremtPage);
     const characters = useSelector(selectCharacters);
 
     const characterListController = useCharacterListController();
 
+    console.log(characterListStatus);
+
     useEffect(() => {
-        characterListController.getCharacterList();
-    }, []);
+        if (characterListStatus === 'init' || characterListStatus === 'updating') {
+            characterListController.getCharacterList({ numberCurrentPage });
+        }
+    }, [characterListStatus]);
 
     return (
         <div className={classNames(classes, 'character-list')}>
             <div className="container character-list__container">
-                <div className="character-list__content">
-                    {characters && characters.length > 0 && characters.map((character) => {
-                        return (
-                            <CharacterTable classes='character-list__item' key={character.id} {...character} />
-                        );
-                    })}
-                    <CharacterListPagination classes="character-list__pagination"/>
+                <div className="character-list__wrapper">
+                    <div className="character-list__content">
+                        {characters && characters.length > 0 && characters.map((character) => {
+                            return (
+                                <CharacterTable classes='character-list__item' key={character.id} {...character} />
+                            );
+                        })}
+                    </div>
+                    <CharacterListPagination classes="character-list__pagination" />
                 </div>
             </div>
         </div>

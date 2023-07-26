@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     characterListStatus: 'init', // 'init, 'loaded', 'reloading', 'updating'
     totalPageCount: 0,
-    currentPage: 0,
+    numberCurremtPage: 1,
     filter: {
         authorName: [],
         topics: [],
@@ -17,7 +17,7 @@ const characterListSlice = createSlice({
     name: 'characterList',
     initialState,
     reducers: {
-        setcharacterListStatus: (state, action) => {
+        setCharacterListStatus: (state, action) => {
             const { status } = action.payload;
 
             state.characterListStatus = status;
@@ -31,19 +31,10 @@ const characterListSlice = createSlice({
             state.characters = [...characters];
         },
 
+        updateNumberCurrentPage: (state, action) => {
+            const { value } = action.payload;
 
-        setFilter: (state, action) => {
-            const { filterName, value } = action.payload;
-
-            state.filter[filterName] = [...state.filter[filterName], value];
-        },
-
-        deleteFilter: (state, action) => {
-            const { filterName, deleteIndex } = action.payload;
-
-            state.filter[filterName] = state.filter[filterName].filter(
-                (_, index) => index !== deleteIndex,
-            );
+            state.numberCurremtPage= value
         },
     },
 });

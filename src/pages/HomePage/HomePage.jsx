@@ -9,7 +9,7 @@ const HomePage = () => {
         <section className="home-page">
             <div className="home-page__container">
                 <div className="home-page__content">
-                    <CharacterList />
+                    <CharacterList classes="home-page__item" />
                 </div>
             </div>
         </section>

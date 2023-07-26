@@ -28,8 +28,7 @@ const Button = forwardRef((props, ref) => {
                 }
 
                 handleClick(e);
-            }}
-        >
+            }}>
             {children}
         </button>
     );

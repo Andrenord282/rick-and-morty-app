@@ -2,7 +2,12 @@
 export { characterListActions } from './characterListSlice';
 
 //-----selectors-----//
-export { selectCharacters } from './selectors';
+export {
+    selectCharacterListStatus,
+    selectNumberCurremtPage,
+    selectTotalPageCount,
+    selectCharacters,
+} from './selectors';
 
 //-----actions-----//
 export { characterListReducer } from './characterListSlice';

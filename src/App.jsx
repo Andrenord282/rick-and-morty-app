@@ -8,13 +8,15 @@ import HomePage from 'pages/HomePage';
 //-----widgets-----//
 
 const App = () => {
-	return (
-		<Routes>
-			<Route path="/" element={<Layout />}>
-				<Route index element={<HomePage />} />
-			</Route>
-		</Routes>
-	);
+    return (
+        <div className='app'>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<HomePage />} />
+                </Route>
+            </Routes>
+        </div>
+    );
 };
 
 export default App;
