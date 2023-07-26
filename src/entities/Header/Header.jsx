@@ -1,13 +1,22 @@
+
+
 //-----components-----//
+
+//-----assets-----//
+import headerLogo from "assets/img/svg/header-logo.svg";
 
 //-----style-----//
 import './Header.scss';
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
         <header className="header">
-            <div className="header__container">
+            <div className="container header__container">
                 <div className="header__content">
+                    <Link to={'/'} className="header__link">
+                        <img src={headerLogo} className="header__logo" alt="" />
+                    </Link>
                 </div>
             </div>
         </header>

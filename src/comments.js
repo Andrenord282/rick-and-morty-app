@@ -1,4 +1,5 @@
 //-----modules-----//
+//-----services-----//
 //-----utilities-----//
 //-----router-----//
 //-----react-dom-----//
@@ -9,5 +10,7 @@
 //-----actions-----//
 //-----pages-----//
 //-----widgets-----//
+//-----features-----//
+//-----entities-----//
 //-----components-----//
 //-----style-----//

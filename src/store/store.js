@@ -1,7 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
-const rootReducer = combineReducers({
+import { characterListReducer } from "./characterListSlice";
 
+const rootReducer = combineReducers({
+    characterList: characterListReducer
 });
 
 const store = configureStore({

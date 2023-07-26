@@ -1,1 +1,1 @@
-
+export { useCharacterListController } from './useCharacterListController';

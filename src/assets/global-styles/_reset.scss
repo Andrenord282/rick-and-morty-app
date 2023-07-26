@@ -7,10 +7,6 @@
     box-sizing: border-box;
 }
 
-*:focus {
-    outline: 1px solid var(--outline-primary);
-}
-
 body {
     font-family: var(--fontMain);
     font-weight: 400;
@@ -25,8 +21,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-size: 22px;
-    color: var(--title-primary);
+    font-size: 24px;
 }
 
 a {
@@ -35,17 +30,20 @@ a {
 
 input {
     border: none;
-
-    &:focus {
-        outline: 1px solid var(--outline-secondary);
-    }
 }
 
 textarea {
     border: none;
     resize: none;
+}
 
-    &:focus {
-        outline: 1px solid var(--outline-secondary);
+.container {
+    width: 100%;
+    max-width: 1440px;
+    padding: 0 20px;
+    margin: 0 auto;
+
+    @media (max-width: 345px) {
+        padding: 0 10px;
     }
 }

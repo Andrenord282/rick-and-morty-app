@@ -1,0 +1,30 @@
+.header {
+    background-color: var(--componet-bg-primary);
+}
+
+.header__container {
+}
+
+.header__content {
+    padding: 15px 0;
+
+    @media (max-width: 768px) {
+        padding: 10px 0;
+    }
+}
+
+.header__link {
+
+}
+
+.header__logo {
+    width: 200px;
+    height: 60px;
+
+    @media (max-width: 768px) {
+        width: 140px;
+        height: 42px;
+    }
+
+}
+

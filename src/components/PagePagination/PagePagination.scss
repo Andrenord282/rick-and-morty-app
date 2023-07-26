@@ -1,0 +1,39 @@
+.page-pagination {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.page-pagination > :not(:last-child) {
+    margin-right: 10px;
+
+    @media (max-width: 768px) {
+        margin-right: 8px;
+    }
+}
+
+.page-pagination__dot {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    flex: 0 0 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--text-color-primary);
+
+    @media (max-width: 768px) {
+        flex: 0 0 3px;
+        height: 3px;
+    }
+}
+
+.page-pagination__btn {
+    flex: 0 0 48px;
+    height: 48px;
+
+    @media (max-width: 768px) {
+        flex: 0 0 32px;
+        height: 32px;
+        padding: 5px;
+    }
+}

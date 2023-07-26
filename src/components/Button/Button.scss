@@ -1,0 +1,71 @@
+.btn {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+
+    &.inactive {
+        cursor: not-allowed;
+    }
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--btn-bg-primary);
+    transition: background-color 0.3s linear;
+
+    & .btn-text {
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--text-color-primary);
+        transition: color 0.3s linear;
+    }
+
+    & .btn-icon {
+        color: var(--text-color-primary);
+        transition: color 0.3s linear;
+    }
+
+
+    &:focus {
+        background-color: var(--btn-bg-extra);
+
+        & .btn-text {
+            color: var(--text-color-extra);
+        }
+
+        & .btn-icon {
+            color: var(--text-color-extra);
+        }
+    }
+
+    &:active {
+        background-color: var(--btn-bg-extra);
+
+        & .btn-text {
+            color: var(--text-color-extra);
+        }
+
+        & .btn-icon {
+            color: var(--text-color-extra);
+            background-color: var(--text-color-extra);
+            fill: var(--text-color-extra);
+        }
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: var(--btn-bg-extra);
+
+            & .btn-text {
+                color: var(--text-color-extra);
+            }
+
+            & .btn-icon {
+                color: var(--text-color-extra);
+            }
+        }
+    }
+}
