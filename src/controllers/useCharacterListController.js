@@ -5,7 +5,7 @@ import { rickAndMortyApi } from 'services/axios/api/rickAndMortyApi';
 import { getObjectFieldValuebyPath } from 'utilities';
 
 //-----redux-----//
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 //-----actions-----//
 import { characterListActions } from 'store/characterListSlice';
@@ -14,12 +14,10 @@ const useCharacterListController = () => {
     const dispatch = useDispatch();
 
     const getCharacterList = async (options) => {
-        const {numberCurrentPage} = options;
+        const { numberCurrentPage } = options;
 
         const query = {
             page: numberCurrentPage,
-            // name: 'rick',
-            // status: 'alive'
         };
 
         const response = await rickAndMortyApi.getCharacterList(query);
@@ -36,9 +34,14 @@ const useCharacterListController = () => {
         dispatch(characterListActions.updateNumberCurrentPage({ value }));
     };
 
+    const updateFilter = (fieldName, value) => {
+        dispatch(characterListActions.updateFilterField({ fieldName, value }));
+    };
+
     return {
         getCharacterList,
         updateNumberCurrentPage,
+        updateFilter,
     };
 };
 

@@ -1,0 +1,60 @@
+.radio-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-input__body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.radio-input__label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio-input__value {
+    display: none;
+}
+
+.radio-input__radio-btn {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    opacity: 0;
+    transition: background-color 0s linear, opacity 0s linear;
+
+    &.active {
+        opacity: 1;
+        transition: background-color 0.3s linear, opacity 0.3s linear;
+    }
+
+    &:focus {
+        background-color: var(--btn-bg-primary);
+
+         & .btn-icon {
+            color: var(--text-color-primary);
+        }
+    }
+
+    &:active {
+        background-color: var(--btn-bg-primary);
+
+        & .btn-icon {
+            color: var(--text-color-primary);
+        }
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            background-color: var(--btn-bg-primary);
+
+            & .btn-icon {
+                color: var(--text-color-primary);
+            }
+        }
+    }
+}

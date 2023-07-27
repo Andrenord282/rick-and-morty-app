@@ -1,0 +1,14 @@
+.character-filter {
+
+}
+
+.character-filter__container {
+    background-color: var(--componet-bg-primary);
+}
+
+.character-filter__content {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    gap: 10px 40px;
+}

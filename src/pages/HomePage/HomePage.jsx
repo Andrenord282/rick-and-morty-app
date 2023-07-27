@@ -1,4 +1,5 @@
 //-----widgets-----//
+import CharacterFilter from "widgets/CharacterFilter";
 import CharacterList from "widgets/CharacterList";
 
 //-----style-----//
@@ -9,6 +10,7 @@ const HomePage = () => {
         <section className="home-page">
             <div className="home-page__container">
                 <div className="home-page__content">
+                    <CharacterFilter />
                     <CharacterList classes="home-page__item" />
                 </div>
             </div>

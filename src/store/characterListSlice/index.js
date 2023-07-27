@@ -6,6 +6,8 @@ export {
     selectCharacterListStatus,
     selectNumberCurremtPage,
     selectTotalPageCount,
+    selectCharacterStatusFilter,
+    selectCharacterGenderFilter,
     selectCharacters,
 } from './selectors';
 

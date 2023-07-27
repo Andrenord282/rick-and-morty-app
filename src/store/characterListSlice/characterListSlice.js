@@ -5,10 +5,8 @@ const initialState = {
     totalPageCount: 0,
     numberCurremtPage: 1,
     filter: {
-        authorName: [],
-        topics: [],
-        dates: [],
-        rating: [],
+        status: null, // 'all', 'alive', 'dead', 'unknown'
+        gender: null, // 'all', 'female', 'male', 'genderless', 'unknown'
     },
     characters: [],
 };
@@ -34,7 +32,18 @@ const characterListSlice = createSlice({
         updateNumberCurrentPage: (state, action) => {
             const { value } = action.payload;
 
-            state.numberCurremtPage= value
+            state.numberCurremtPage = value;
+        },
+
+        updateFilterField: (state, action) => {
+            const { fieldName, value } = action.payload;
+
+            if (value === 'all') {
+                state.filter[fieldName] = null;
+                return;
+            }
+
+            state.filter[fieldName] = value;
         },
     },
 });
