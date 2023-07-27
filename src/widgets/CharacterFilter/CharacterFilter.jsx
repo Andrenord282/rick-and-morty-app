@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { selectCharacterListStatus, selectNumberCurremtPage, selectCharacters, } from "store/characterListSlice";
 
 //-----features-----//
+import CharterSearchName from "features/CharterSearchName";
 import CharacterFilterStatus from "features/CharacterFilterStatus";
 import CharacterFilterGender from "features/CharacterFilterGender";
 
@@ -34,7 +35,8 @@ const CharacterFilter = (props) => {
         <div className={classNames(classes, 'character-filter')}>
             <div className="container character-filter__container">
                 <div className="character-filter__content">
-                    <CharacterFilterStatus />
+                    <CharterSearchName classes='character-filter__item'/>
+                    <CharacterFilterStatus classes='character-filter__item'/>
                     <CharacterFilterGender classes='character-filter__item' />
                 </div>
             </div>

@@ -4,9 +4,24 @@
 }
 
 .radio-input__body {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.radio-input .radio-input__input {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    opacity: 0;
+    &:focus {
+        & + .radio-input__label {
+            outline: 1px red;
+            border-bottom: 1px solid var(--color-extra);
+        }
+    }
 }
 
 .radio-input__label {
@@ -14,10 +29,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-}
-
-.radio-input__value {
-    display: none;
+    border-bottom: 1px solid transparent;
 }
 
 .radio-input__radio-btn {
@@ -35,7 +47,7 @@
     &:focus {
         background-color: var(--btn-bg-primary);
 
-         & .btn-icon {
+        & .btn-icon {
             color: var(--text-color-primary);
         }
     }

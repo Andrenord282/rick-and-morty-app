@@ -37,6 +37,10 @@ textarea {
     resize: none;
 }
 
+*:focus {
+    // outline: none;
+}
+
 .app {
     height: 100vh;
     display: flex;

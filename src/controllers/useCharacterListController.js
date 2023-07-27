@@ -14,19 +14,21 @@ const useCharacterListController = () => {
     const dispatch = useDispatch();
 
     const getCharacterList = async (options) => {
-        const { numberCurrentPage } = options;
+        try {
+            const { numberCurrentPage } = options;
 
-        const query = {
-            page: numberCurrentPage,
-        };
+            const query = {
+                page: numberCurrentPage,
+            };
 
-        const response = await rickAndMortyApi.getCharacterList(query);
+            const response = await rickAndMortyApi.getCharacterList(query);
 
-        const totalPageCount = getObjectFieldValuebyPath('info.pages', response);
-        const characters = getObjectFieldValuebyPath('results', response);
+            const totalPageCount = getObjectFieldValuebyPath('info.pages', response);
+            const characters = getObjectFieldValuebyPath('results', response);
 
-        dispatch(characterListActions.initCharacters({ totalPageCount, characters }));
-        dispatch(characterListActions.setCharacterListStatus({ status: 'loaded' }));
+            dispatch(characterListActions.initCharacters({ totalPageCount, characters }));
+            dispatch(characterListActions.setCharacterListStatus({ status: 'loaded' }));
+        } catch (error) {}
     };
 
     const updateNumberCurrentPage = (value) => {
