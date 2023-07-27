@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //-----modules-----//
 import classNames from "classnames";
 
@@ -11,7 +12,7 @@ import { useCharacterListController } from "controllers";
 import { useSelector } from "react-redux";
 
 //-----selectors-----//
-import { selectCharacterListStatus, selectNumberCurremtPage, selectCharacters, } from "store/characterListSlice";
+import { selectCharacterListStatus, selectNumberCurremtPage, selectCharacters, selectCharacterFilters, } from "store/characterListSlice";
 
 //-----features-----//
 import CharacterListPagination from "features/CharacterListPagination";
@@ -26,18 +27,17 @@ import './CharacterList.scss';
 const CharacterList = (props) => {
     const { classes } = props;
     const characterListStatus = useSelector(selectCharacterListStatus);
+    const filters = useSelector(selectCharacterFilters);
     const numberCurrentPage = useSelector(selectNumberCurremtPage);
     const characters = useSelector(selectCharacters);
 
     const characterListController = useCharacterListController();
 
-    console.log(characterListStatus);
-
     useEffect(() => {
         if (characterListStatus === 'init' || characterListStatus === 'updating') {
-            characterListController.getCharacterList({ numberCurrentPage });
+            characterListController.getCharacterList({ page: numberCurrentPage, ...filters });
         }
-    }, [characterListStatus]);
+    }, [characterListStatus, filters, numberCurrentPage]);
 
     return (
         <div className={classNames(classes, 'character-list')}>

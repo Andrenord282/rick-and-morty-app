@@ -2,6 +2,7 @@ import apiServer from '../client/';
 
 class RickAndMortyApi {
     getCharacterList = async (query) => {
+
         try {
             const response = await apiServer.get('/character', {
                 params: {

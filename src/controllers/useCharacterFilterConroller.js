@@ -9,7 +9,7 @@ import { characterListActions } from 'store/characterListSlice';
 
 const useCharacterFilterConroller = () => {
     const dispatch = useDispatch();
-    
+
     const searchFilterValue = async (params, value) => {
         try {
             const query = {
@@ -25,9 +25,14 @@ const useCharacterFilterConroller = () => {
         dispatch(characterListActions.updateFilterField({ fieldName, value }));
     };
 
+    const initSearchByFilters =  () => {
+        dispatch(characterListActions.setCharacterListStatus({status: 'updating'}))
+    };
+
     return {
         searchFilterValue,
         updateFilter,
+        initSearchByFilters,
     };
 };
 

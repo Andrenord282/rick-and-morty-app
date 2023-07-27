@@ -1,25 +1,37 @@
 .searcher-input {
     width: 100%;
-    max-width: 200px;
+    max-width: 260px;
     position: relative;
     z-index: 10;
 }
 
-.radio-input__title {
+.searcher-input__title {
     display: block;
     margin-bottom: 5px;
+}
+
+.searcher-input__input-wrapper {
+    position: relative;
 }
 
 .searcher-input__input {
     width: 100%;
     padding: 15px;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-primary);
     background-color: var(--component-bg-secondary);
 
     @media (max-width: 768px) {
         font-size: 16px;
     }
+}
+
+.searcher-input__reset-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    padding: 5px;
 }
 
 .searcher-input__found-list {
@@ -35,6 +47,7 @@
     justify-content: space-between;
     padding: 10px;
     font-size: 14px;
+    text-align: left;
     background-color: var(--btn-bg-primary);
     border-bottom: 1px solid var(--color-primary);
 

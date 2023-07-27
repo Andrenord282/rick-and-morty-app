@@ -2,14 +2,11 @@
 //-----modules-----//
 import classNames from "classnames";
 
-//-----utilities-----//
-import { getObjectFieldValuebyPath } from "utilities/getObjectFieldValuebyPath";
-
 //-----hooks-----//
 import { useEffect, useRef, useState } from "react";
 import { useInputChange } from 'hooks/useInputChange';
 import { useDebounce } from 'hooks/useDebounce';
-
+import { useEventOutside } from "hooks/useEventOutside";
 //-----components-----//
 import Button from "components/Button";
 import * as Icon from 'components/Icon';
@@ -23,17 +20,19 @@ const SearchInput = (props) => {
         labelText,
         placeholder,
         foundList,
-        fieldIdFoundItemPath,
-        fieldValueFoundItemPath,
+        resetCurrentSelect,
         setFoundList,
         selectFoundItem,
         searchRequest,
     } = props;
-
+    const searchInputBodyRef = useRef(null);
     const searchInputRef = useRef(null);
     const searchInput = useInputChange('');
     const [searchIsLock, setSearchIsLock] = useState(false);
     const debouncedSearchValue = useDebounce(searchInput.value);
+
+    useEventOutside(searchInputBodyRef, () => setFoundList([]));
+
 
     useEffect(() => {
         if (debouncedSearchValue.length < 2 || searchIsLock === true) {
@@ -44,9 +43,18 @@ const SearchInput = (props) => {
 
     const handleChangeSearch = (e) => {
         searchInput.onChenge(e);
+        
         if (e.target.value.length <= 2) {
+            setSearchIsLock(false);
             setFoundList([]);
+            resetCurrentSelect(null);
         }
+    };
+
+    const handleResetCurrentSelect = () => {
+        searchInput.onReset();
+        resetCurrentSelect(null);
+        setSearchIsLock(false);
     };
 
     const handleSelectFoundItem = (e) => {
@@ -57,30 +65,33 @@ const SearchInput = (props) => {
     };
 
     return (
-        <div className={classNames(classes, 'searcher-input')}>
+        <div ref={searchInputBodyRef}
+            className={classNames(classes, 'searcher-input')}>
             {labelText && <p className="searcher-input__title">{labelText}</p>}
-            <input
-                type="text"
-                ref={searchInputRef}
-                className="searcher-input__input"
-                placeholder={placeholder}
-                value={searchInput.value}
-                onChange={handleChangeSearch} />
+            <div className="searcher-input__input-wrapper">
+                <input
+                    type="text"
+                    ref={searchInputRef}
+                    className="searcher-input__input"
+                    placeholder={placeholder}
+                    value={searchInput.value}
+                    onChange={handleChangeSearch} />
+                <Button classes='searcher-input__reset-btn'
+                    handleClick={handleResetCurrentSelect}>
+                    <Icon.Delete className='btn-icon' />
+                </Button>
+            </div>
             {foundList && foundList.length > 0 && (
                 <div className="searcher-input__found-list">
                     {foundList.map((item, index) => {
-
-                        const foundItemFieldId = getObjectFieldValuebyPath(fieldIdFoundItemPath, item);
-                        const foundItemFieldValue = getObjectFieldValuebyPath(fieldValueFoundItemPath, item);
-
                         return (
                             <Button
                                 classes='searcher-input__select-btn'
-                                key={foundItemFieldId || foundItemFieldValue}
+                                key={item}
                                 data-btn-role='select-found-item'
                                 data-btn-index={index}
                                 handleClick={handleSelectFoundItem}>
-                                <span className='btn-text'>{foundItemFieldValue}</span>
+                                <span className='btn-text'>{item}</span>
                                 <Icon.Plus className='btn-icon' />
                             </Button>
                         );

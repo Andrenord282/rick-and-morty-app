@@ -13,9 +13,6 @@ import { selectNumberCurremtPage, selectTotalPageCount } from "store/characterLi
 //-----components-----//
 import { PagePagination } from "components/PagePagination";
 
-//-----style-----//
-import './CharacterListPagination.scss';
-
 const CharacterListPagination = (props) => {
     const { classes } = props;
     const numberCurrentPage = useSelector(selectNumberCurremtPage);

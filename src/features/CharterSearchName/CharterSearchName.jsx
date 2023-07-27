@@ -1,6 +1,9 @@
 //-----modules-----//
 import classNames from "classnames";
 
+//-----utilities-----//
+import { getObjectFieldValuebyPath } from "utilities/getObjectFieldValuebyPath";
+
 //-----hooks-----//
 import { useState } from "react";
 
@@ -17,22 +20,30 @@ const CharterSearchName = (props) => {
 
     const handleNameRequestCharacterName = async (value) => {
         const response = await characterFilterConroller.searchFilterValue('name', value);
-        setFoundCharacterName(response.results);
+
+        const results = response.results.map((item) => {
+            return item.name;
+        });
+
+        const uniqResults = Array.from(new Set(results));
+        setFoundCharacterName(uniqResults);
     };
 
     const handleUpdateFilterName = (value) => {
         characterFilterConroller.updateFilter('name', value);
-        setFoundCharacterName([])
+
+        if (foundCharacterName.length > 0) {
+            setFoundCharacterName([]);
+        }
     };
 
     return (
         <SearchInput
             classes={classNames(classes)}
-            labelText="charter nname:"
+            labelText="charter name:"
             placeholder='write the name'
             foundList={foundCharacterName}
-            fieldIdFoundItemPath="id"
-            fieldValueFoundItemPath='name'
+            resetCurrentSelect={handleUpdateFilterName}
             setFoundList={setFoundCharacterName}
             selectFoundItem={handleUpdateFilterName}
             searchRequest={handleNameRequestCharacterName} />

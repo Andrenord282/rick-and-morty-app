@@ -4,7 +4,10 @@ const initialState = {
     characterListStatus: 'init', // 'init, 'loaded', 'reloading', 'updating'
     totalPageCount: 0,
     numberCurremtPage: 1,
-    filter: {
+    filters: {
+        name: null,
+        species: null,
+        type: null,
         status: null, // 'all', 'alive', 'dead', 'unknown'
         gender: null, // 'all', 'female', 'male', 'genderless', 'unknown'
     },
@@ -39,11 +42,11 @@ const characterListSlice = createSlice({
             const { fieldName, value } = action.payload;
 
             if (value === 'all') {
-                state.filter[fieldName] = null;
+                state.filters[fieldName] = null;
                 return;
             }
 
-            state.filter[fieldName] = value;
+            state.filters[fieldName] = value;
         },
     },
 });

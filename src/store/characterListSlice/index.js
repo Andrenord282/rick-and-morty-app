@@ -6,6 +6,7 @@ export {
     selectCharacterListStatus,
     selectNumberCurremtPage,
     selectTotalPageCount,
+    selectCharacterFilters,
     selectCharacterStatusFilter,
     selectCharacterGenderFilter,
     selectCharacters,

@@ -2,7 +2,7 @@
 import classNames from "classnames";
 
 //-----controllers-----//
-import { useCharacterListController } from "controllers";
+import { useCharacterFilterConroller } from "controllers";
 
 //-----redux-----//
 import { useSelector } from "react-redux";
@@ -13,20 +13,16 @@ import { selectCharacterGenderFilter } from "store/characterListSlice";
 //-----components-----//
 import { RadioInput } from "components/RadioInput";
 
-//-----style-----//
-import './CharacterFilterGender.scss';
-
-
 const radioList = ['all', 'female', 'male', 'genderless', 'unknown'];
 
 
 const CharacterFilterGender = (props) => {
     const { classes } = props;
     const characterGenderFilter = useSelector(selectCharacterGenderFilter);
-    const characterListController = useCharacterListController();
+    const characterFilterConroller = useCharacterFilterConroller();
 
     const handleUpdateFilterGender = (value) => {
-        characterListController.updateFilter('gender', value);
+        characterFilterConroller.updateFilter('gender', value);
     };
 
     return (

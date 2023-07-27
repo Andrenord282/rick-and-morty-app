@@ -13,13 +13,8 @@ import { characterListActions } from 'store/characterListSlice';
 const useCharacterListController = () => {
     const dispatch = useDispatch();
 
-    const getCharacterList = async (options) => {
+    const getCharacterList = async (query) => {
         try {
-            const { numberCurrentPage } = options;
-
-            const query = {
-                page: numberCurrentPage,
-            };
 
             const response = await rickAndMortyApi.getCharacterList(query);
 
@@ -36,14 +31,9 @@ const useCharacterListController = () => {
         dispatch(characterListActions.updateNumberCurrentPage({ value }));
     };
 
-    const updateFilter = (fieldName, value) => {
-        dispatch(characterListActions.updateFilterField({ fieldName, value }));
-    };
-
     return {
         getCharacterList,
         updateNumberCurrentPage,
-        updateFilter,
     };
 };
 

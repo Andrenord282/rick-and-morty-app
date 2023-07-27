@@ -10,34 +10,40 @@ import { useCharacterFilterConroller } from "controllers";
 //-----components-----//
 import { SearchInput } from "components/SearchInput";
 
-const CharterSearchName = (props) => {
+const CharterSearchSpecies = (props) => {
     const { classes } = props;
-    const [foundCharacterName, setFoundCharacterName] = useState([]);
+    const [foundCharacterSpecies, setFoundCharacterSpecies] = useState([]);
     const characterFilterConroller = useCharacterFilterConroller();
 
     const handleNameRequestCharacterName = async (value) => {
         const response = await characterFilterConroller.searchFilterValue('name', value);
-        setFoundCharacterName(response.results);
+
+        const results = response.results.map((item) => {
+            return item.name;
+        });
+
+        const uniqResults = Array.from(new Set(results));
+        setFoundCharacterSpecies(uniqResults);
     };
 
     const handleUpdateFilterName = (value) => {
-        characterFilterConroller.updateFilter('name', value);
-        setFoundCharacterName([])
+        characterFilterConroller.updateFilter('species', value);
+        setFoundCharacterSpecies([]);
     };
 
     return (
         <SearchInput
             classes={classNames(classes)}
-            labelText="charter nname:"
-            placeholder='write the name'
-            foundList={foundCharacterName}
+            labelText="charter species:"
+            placeholder='write a species'
+            foundList={foundCharacterSpecies}
             fieldIdFoundItemPath="id"
             fieldValueFoundItemPath='name'
-            setFoundList={setFoundCharacterName}
+            setFoundList={setFoundCharacterSpecies}
             selectFoundItem={handleUpdateFilterName}
             searchRequest={handleNameRequestCharacterName} />
     );
 
 };
 
-export default CharterSearchName;
+export default CharterSearchSpecies;
