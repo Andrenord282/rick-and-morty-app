@@ -8,6 +8,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
+
+    @media (max-width: 475px) {
+        flex-wrap: wrap;
+    }
 }
 
 .radio-input .radio-input__input {

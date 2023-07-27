@@ -15,18 +15,24 @@ const CharterSearchSpecies = (props) => {
     const [foundCharacterSpecies, setFoundCharacterSpecies] = useState([]);
     const characterFilterConroller = useCharacterFilterConroller();
 
-    const handleNameRequestCharacterName = async (value) => {
-        const response = await characterFilterConroller.searchFilterValue('name', value);
+    const handleNameRequestCharacterSpecies = async (value) => {
+        const response = await characterFilterConroller.searchFilterValue('species', value);
 
-        const results = response.results.map((item) => {
-            return item.name;
-        });
+        if (response.status === 200) {
+            const results = response.data.results.map((item) => {
+                return item.species;
+            });
+            console.log(results)
+            const uniqResults = Array.from(new Set(results));
 
-        const uniqResults = Array.from(new Set(results));
-        setFoundCharacterSpecies(uniqResults);
+            setFoundCharacterSpecies(uniqResults);
+        } else if (response.status === 404) {
+            setFoundCharacterSpecies(['not found']);
+        }
+
     };
 
-    const handleUpdateFilterName = (value) => {
+    const handleUpdateFilterSpecies = (value) => {
         characterFilterConroller.updateFilter('species', value);
         setFoundCharacterSpecies([]);
     };
@@ -39,9 +45,10 @@ const CharterSearchSpecies = (props) => {
             foundList={foundCharacterSpecies}
             fieldIdFoundItemPath="id"
             fieldValueFoundItemPath='name'
+            resetCurrentSelect={handleUpdateFilterSpecies}
             setFoundList={setFoundCharacterSpecies}
-            selectFoundItem={handleUpdateFilterName}
-            searchRequest={handleNameRequestCharacterName} />
+            selectFoundItem={handleUpdateFilterSpecies}
+            searchRequest={handleNameRequestCharacterSpecies} />
     );
 
 };

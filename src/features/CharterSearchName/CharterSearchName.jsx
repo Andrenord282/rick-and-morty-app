@@ -21,12 +21,18 @@ const CharterSearchName = (props) => {
     const handleNameRequestCharacterName = async (value) => {
         const response = await characterFilterConroller.searchFilterValue('name', value);
 
-        const results = response.results.map((item) => {
-            return item.name;
-        });
+        if (response.status === 200) {
+            const results = response.data.results.map((item) => {
+                return item.name;
+            });
 
-        const uniqResults = Array.from(new Set(results));
-        setFoundCharacterName(uniqResults);
+            const uniqResults = Array.from(new Set(results));
+
+            setFoundCharacterName(uniqResults);
+        } else if (response.status === 404) {
+            setFoundCharacterName(['not found']);
+        }
+
     };
 
     const handleUpdateFilterName = (value) => {

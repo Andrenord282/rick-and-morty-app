@@ -25,8 +25,9 @@ const useCharacterFilterConroller = () => {
         dispatch(characterListActions.updateFilterField({ fieldName, value }));
     };
 
-    const initSearchByFilters =  () => {
-        dispatch(characterListActions.setCharacterListStatus({status: 'updating'}))
+    const initSearchByFilters = () => {
+        dispatch(characterListActions.updateNumberCurrentPage({ value: 1 }));
+        dispatch(characterListActions.setCharacterListStatus({ status: 'updating' }));
     };
 
     return {

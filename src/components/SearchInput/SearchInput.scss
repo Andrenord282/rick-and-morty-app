@@ -1,6 +1,5 @@
 .searcher-input {
     width: 100%;
-    max-width: 260px;
     position: relative;
     z-index: 10;
 }
@@ -24,6 +23,7 @@
     @media (max-width: 768px) {
         font-size: 16px;
     }
+
 }
 
 .searcher-input__reset-btn {
@@ -102,4 +102,19 @@
             }
         }
     }
+}
+
+.searcher-input__not-found {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 14px;
+    text-align: left;
+    background-color: var(--btn-bg-primary);
+    border-bottom: 1px solid var(--color-primary);
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--text-color-primary);
 }

@@ -49,8 +49,11 @@ const CharacterList = (props) => {
                                 <CharacterTable classes='character-list__item' key={character.id} {...character} />
                             );
                         })}
+                        {characterListStatus === 'loaded' && characters.length === 0 && (
+                            <p className="character-list__error">characters not found</p>
+                        )}
                     </div>
-                    <CharacterListPagination classes="character-list__pagination" />
+                    {characters && characters.length > 0 && <CharacterListPagination classes="character-list__pagination" />}
                 </div>
             </div>
         </div>

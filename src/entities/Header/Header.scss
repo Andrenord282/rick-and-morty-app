@@ -16,6 +16,11 @@
 }
 
 .header__link {
+    border-bottom: 1px solid transparent;
+
+    &:focus {
+        border-bottom: 1px solid var(--color-extra);
+    }
 }
 
 .header__logo {

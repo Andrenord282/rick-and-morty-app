@@ -20,6 +20,7 @@ const SearchInput = (props) => {
         labelText,
         placeholder,
         foundList,
+        currentSelectValue,
         resetCurrentSelect,
         setFoundList,
         selectFoundItem,
@@ -35,7 +36,7 @@ const SearchInput = (props) => {
 
 
     useEffect(() => {
-        if (debouncedSearchValue.length < 2 || searchIsLock === true) {
+        if (debouncedSearchValue.length < 2 || searchIsLock === true || !searchInput.value) {
             return;
         }
         searchRequest(debouncedSearchValue);
@@ -43,8 +44,8 @@ const SearchInput = (props) => {
 
     const handleChangeSearch = (e) => {
         searchInput.onChenge(e);
-        
-        if (e.target.value.length <= 2) {
+        selectFoundItem(e.target.value);
+        if (e.target.value.length === 0) {
             setSearchIsLock(false);
             setFoundList([]);
             resetCurrentSelect(null);
@@ -53,6 +54,7 @@ const SearchInput = (props) => {
 
     const handleResetCurrentSelect = () => {
         searchInput.onReset();
+        searchInputRef.current.focus();
         resetCurrentSelect(null);
         setSearchIsLock(false);
     };
@@ -84,17 +86,31 @@ const SearchInput = (props) => {
             {foundList && foundList.length > 0 && (
                 <div className="searcher-input__found-list">
                     {foundList.map((item, index) => {
-                        return (
-                            <Button
-                                classes='searcher-input__select-btn'
-                                key={item}
-                                data-btn-role='select-found-item'
-                                data-btn-index={index}
-                                handleClick={handleSelectFoundItem}>
-                                <span className='btn-text'>{item}</span>
-                                <Icon.Plus className='btn-icon' />
-                            </Button>
-                        );
+                        switch (true) {
+                            case item !== 'not found':
+                                return (
+                                    <Button
+                                        classes='searcher-input__select-btn'
+                                        key={item}
+                                        data-btn-role='select-found-item'
+                                        data-btn-index={index}
+                                        handleClick={handleSelectFoundItem}>
+                                        <span className='btn-text'>{item}</span>
+                                        <Icon.Plus className='btn-icon' />
+                                    </Button>
+                                );
+                            case item === 'not found':
+                                return (
+                                    <p
+                                        className='searcher-input__not-found'
+                                        key={item}>
+                                        {item}
+                                    </p>
+                                );
+                            default:
+                                return null;
+                        }
+
                     })}
                 </div>
             )}

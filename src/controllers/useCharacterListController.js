@@ -15,13 +15,16 @@ const useCharacterListController = () => {
 
     const getCharacterList = async (query) => {
         try {
-
             const response = await rickAndMortyApi.getCharacterList(query);
 
-            const totalPageCount = getObjectFieldValuebyPath('info.pages', response);
-            const characters = getObjectFieldValuebyPath('results', response);
+            if (response.status === 200) {
+                const totalPageCount = getObjectFieldValuebyPath('info.pages', response.data);
+                const characters = getObjectFieldValuebyPath('results', response.data);
+                dispatch(characterListActions.initCharacters({ totalPageCount, characters }));
+            } else if (response.status === 404) {
+                dispatch(characterListActions.initCharacters({ totalPageCount: 0, characters: [] }));
+            }
 
-            dispatch(characterListActions.initCharacters({ totalPageCount, characters }));
             dispatch(characterListActions.setCharacterListStatus({ status: 'loaded' }));
         } catch (error) {}
     };
