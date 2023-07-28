@@ -39,7 +39,9 @@
 }
 
 .character-list__error {
+    width: 100%;
     font-size: 30px;
+    text-align: center;
     text-transform: uppercase;
     color: var(--text-color-secondary);
 }

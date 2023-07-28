@@ -9,6 +9,8 @@ import * as Icon from "components/Icon";
 import Button from "components/Button";
 import Modal from "components/Modal";
 
+//-----assets-----//
+import Spinner from "assets/img/svg/spinner.svg";
 
 //-----style-----//
 import './CharacterModal.scss';
@@ -30,6 +32,7 @@ const CharacterModal = (props) => {
         onClose,
     } = props;
     const modalCloseBtnRef = useRef(null);
+    const [loadingEpisodeList, setLoadingEpisodeList] = useState(false);
     const [episodeList, setEpisodeList] = useState([]);
     const characterListController = useCharacterListController();
 
@@ -43,8 +46,10 @@ const CharacterModal = (props) => {
 
     const handleSearchCharacterEpisodes = async () => {
         modalCloseBtnRef?.current.focus();
+        setLoadingEpisodeList(true);
         const respone = await characterListController.searchСharacterEpisodes(episode);
         setEpisodeList(respone);
+        setLoadingEpisodeList(false);
     };
 
     return (
@@ -91,6 +96,9 @@ const CharacterModal = (props) => {
                         <Button classes="character-modal__search-btn" handleClick={handleSearchCharacterEpisodes}>
                             <span className="btn-text">Search episodes</span>
                         </Button>
+                    )}
+                    {loadingEpisodeList && (
+                        <Icon.Spinner />
                     )}
                     {episodeList && episodeList.length > 0 && (
                         <div className="character-modal__character-episode-list">
