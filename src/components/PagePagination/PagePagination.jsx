@@ -77,6 +77,7 @@ const PagePagination = (props) => {
         <div className={classNames(classes, 'page-pagination')}>
             <Button classes={`page-pagination__btn ${classActivePrevPage}`}
                 data-btn-role="prev-page"
+                data-btn-scroll="to-filters"
                 handleClick={handleSelectPage}>
                 <Icon.Prev className="btn-icon" />
             </Button>
@@ -90,6 +91,7 @@ const PagePagination = (props) => {
                         <Button classes={`page-pagination__btn ${classSelectNumperPage}`}
                             key={number}
                             data-btn-role="page-number"
+                            data-btn-scroll="to-filters"
                             handleClick={handleSelectPage}>
                             <span className="btn-text">{number}</span>
                         </Button>
@@ -109,6 +111,7 @@ const PagePagination = (props) => {
                             <Button classes={`page-pagination__btn ${classSelectNumperPage}`}
                                 key={number}
                                 data-btn-role="page-number"
+                                data-btn-scroll="to-filters"
                                 handleClick={handleSelectPage}>
                                 <span className="btn-text">{number}</span>
                             </Button>
@@ -118,6 +121,7 @@ const PagePagination = (props) => {
                             <Button classes={`page-pagination__btn ${classSelectNumperPage}`}
                                 key={number}
                                 data-btn-role="page-number"
+                                data-btn-scroll="to-filters"
                                 handleClick={handleSelectPage}>
                                 <span className="btn-text">{number}</span>
                             </Button>
@@ -143,6 +147,7 @@ const PagePagination = (props) => {
                         <Button classes={`page-pagination__btn ${classSelectNumperPage}`}
                             key={number}
                             data-btn-role="page-number"
+                            data-btn-scroll="to-filters"
                             handleClick={handleSelectPage}>
                             <span className="btn-text">{number}</span>
                         </Button>
@@ -154,6 +159,7 @@ const PagePagination = (props) => {
             })}
             <Button classes={`page-pagination__btn ${classActiveNextPage}`}
                 data-btn-role="next-page"
+                data-btn-scroll="to-filters"
                 handleClick={handleSelectPage}>
                 <Icon.Next className="btn-icon" />
             </Button>
