@@ -1,7 +1,3 @@
-
-
-//-----components-----//
-
 //-----assets-----//
 import headerLogo from "assets/img/svg/header-logo.svg";
 

@@ -7,6 +7,8 @@ const useTabNavigateElementList = (
 ) => {
     const handleActivateRef = useRef(handleActivate);
     const handleDeactivateRef = useRef(handleDeactivate);
+    const listLength = useRef(null);
+    const listIndex = useRef(0);
 
     useEffect(() => {
         handleActivateRef.current = handleActivate;
@@ -14,22 +16,29 @@ const useTabNavigateElementList = (
     }, [handleActivate, handleDeactivate]);
 
     useEffect(() => {
+        if (!delegateElementRef?.current.children.length) {
+            return;
+        }
+
         const delegateElement = delegateElementRef.current;
+        listLength.current = delegateElementRef.current?.children.length;
 
         const handleFocusinElement = (e) => {
             switch (true) {
                 case delegateElement && delegateElement.contains(e.target):
-                    if (handleActivateRef.current) {
-                        handleActivateRef.current(e);
-                    }
+                    listIndex.current++;
+                    break;
+
+                case delegateElement &&
+                    !delegateElement.contains(e.target) &&
+                    listIndex.current === listLength.current:
+                    listIndex.current = 0;
+                    delegateElement.children[listIndex.current].focus();
                     break;
 
                 case delegateElement && !delegateElement.contains(e.target):
-                    if (handleDeactivateRef.current) {
-                        handleDeactivateRef.current(e);
-                    }
+                    listIndex.current = 0;
                     break;
-
                 default:
                     break;
             }
@@ -40,7 +49,7 @@ const useTabNavigateElementList = (
         return () => {
             document.removeEventListener('focusin', handleFocusinElement);
         };
-    }, [delegateElementRef]);
+    });
 };
 
 export { useTabNavigateElementList };

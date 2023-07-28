@@ -7,6 +7,9 @@ import { useEffect, useRef, useState } from "react";
 import { useInputChange } from 'hooks/useInputChange';
 import { useDebounce } from 'hooks/useDebounce';
 import { useEventOutside } from "hooks/useEventOutside";
+import { useTabNavigateElementList } from "hooks/useTabNavigateElementList";
+import { useEventKey } from "hooks/useEventKey";
+
 //-----components-----//
 import Button from "components/Button";
 import * as Icon from 'components/Icon';
@@ -27,6 +30,7 @@ const SearchInput = (props) => {
         searchRequest,
     } = props;
 
+    const foundListRef = useRef(null);
     const searchInputBodyRef = useRef(null);
     const searchInputRef = useRef(null);
     const searchInput = useInputChange('');
@@ -39,6 +43,16 @@ const SearchInput = (props) => {
         }
     });
 
+    useEventKey(27, 'keydown', () => {
+        if (foundList.length > 0) {
+            searchInputRef.current.focus();
+            setFoundList([]);
+        }
+    });
+
+    useTabNavigateElementList(foundListRef, null, () => {
+        setFoundList([]);
+    });
 
     useEffect(() => {
         if (debouncedSearchValue.length < 2 || searchIsLock === true || !searchInput.value) {
@@ -88,41 +102,40 @@ const SearchInput = (props) => {
                     <Icon.Delete className='btn-icon' />
                 </Button>
             </div>
-            {foundList && foundList.length > 0 && (
-                <div className="searcher-input__found-list">
-                    {foundList.map((item, index) => {
-                        if (listLehgth >= index + 1) {
+            <div
+                ref={foundListRef}
+                className="searcher-input__found-list">
+                {foundList && foundList.length > 0 && foundList.map((item, index) => {
+                    if (listLehgth < index + 1) {
+                        return null;
+                    }
+
+                    switch (true) {
+                        case item !== 'not found':
+                            return (
+                                <Button
+                                    classes='searcher-input__select-btn'
+                                    key={item}
+                                    data-btn-role='select-found-item'
+                                    data-btn-index={index}
+                                    handleClick={handleSelectFoundItem}>
+                                    <span className='btn-text'>{item}</span>
+                                    <Icon.Plus className='btn-icon' />
+                                </Button>
+                            );
+                        case item === 'not found':
+                            return (
+                                <p
+                                    className='searcher-input__not-found'
+                                    key={item}>
+                                    {item}
+                                </p>
+                            );
+                        default:
                             return null;
-                        }
-
-                        switch (true) {
-                            case item !== 'not found':
-                                return (
-                                    <Button
-                                        classes='searcher-input__select-btn'
-                                        key={item}
-                                        data-btn-role='select-found-item'
-                                        data-btn-index={index}
-                                        handleClick={handleSelectFoundItem}>
-                                        <span className='btn-text'>{item}</span>
-                                        <Icon.Plus className='btn-icon' />
-                                    </Button>
-                                );
-                            case item === 'not found':
-                                return (
-                                    <p
-                                        className='searcher-input__not-found'
-                                        key={item}>
-                                        {item}
-                                    </p>
-                                );
-                            default:
-                                return null;
-                        }
-
-                    })}
-                </div>
-            )}
+                    }
+                })}
+            </div>
         </div>
     );
 

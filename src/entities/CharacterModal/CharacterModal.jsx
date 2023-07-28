@@ -9,16 +9,12 @@ import * as Icon from "components/Icon";
 import Button from "components/Button";
 import Modal from "components/Modal";
 
-//-----assets-----//
-import Spinner from "assets/img/svg/spinner.svg";
-
 //-----style-----//
 import './CharacterModal.scss';
 
 
 const CharacterModal = (props) => {
     const {
-        classes,
         name,
         status,
         species,

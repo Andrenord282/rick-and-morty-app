@@ -22,7 +22,6 @@ const CharterSearchSpecies = (props) => {
             const results = response.data.results.map((item) => {
                 return item.species;
             });
-            console.log(results);
             const uniqResults = Array.from(new Set(results));
 
             setFoundCharacterSpecies(uniqResults);
