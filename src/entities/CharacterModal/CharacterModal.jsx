@@ -1,18 +1,17 @@
-
-//-----modules-----//
-import classNames from "classnames";
+//-----hooks-----//
+import { useEffect, useRef, useState } from "react";
 
 //-----controllers-----//
 import { useCharacterListController } from "controllers";
 
 //-----components-----//
+import * as Icon from "components/Icon";
 import Button from "components/Button";
 import Modal from "components/Modal";
 
 
 //-----style-----//
 import './CharacterModal.scss';
-import { useState } from "react";
 
 
 const CharacterModal = (props) => {
@@ -30,10 +29,20 @@ const CharacterModal = (props) => {
         isOpen,
         onClose,
     } = props;
+    const modalCloseBtnRef = useRef(null);
     const [episodeList, setEpisodeList] = useState([]);
     const characterListController = useCharacterListController();
 
+    useEffect(() => {
+        modalCloseBtnRef?.current.focus();
+    }, []);
+
+    const handleCloseModal = () => {
+        onClose();
+    };
+
     const handleSearchCharacterEpisodes = async () => {
+        modalCloseBtnRef?.current.focus();
         const respone = await characterListController.searchСharacterEpisodes(episode);
         setEpisodeList(respone);
     };
@@ -43,14 +52,20 @@ const CharacterModal = (props) => {
             isOpen={isOpen}
             onClose={onClose}>
             <div className="character-modal">
-                <div className="character-modal__character-img">
-                    <img src={image} alt="" className="character-modal__ava" />
-                </div>
-                <div className="character-modal__character-descr">
-                    <p className="character-modal__title">
-                        {name}
-                    </p>
-                    <div className="character-modal__character-descr-item">
+                <Button
+                    ref={modalCloseBtnRef}
+                    classes="character-modal__close-btn"
+                    handleClick={handleCloseModal}>
+                    <Icon.Close className="btn-icon" />
+                </Button>
+                <div className="character-modal__basic-info">
+                    <div className="character-modal__character-img">
+                        <img src={image} alt="" className="character-modal__ava" />
+                    </div>
+                    <div className="character-modal__characteristics">
+                        <p className="character-modal__title">
+                            {name}
+                        </p>
                         <p className="character-modal__text">
                             {gender}
                         </p>
@@ -58,22 +73,20 @@ const CharacterModal = (props) => {
                             {status}
                         </p>
                     </div>
-                    <div className="character-modal__character-descr-item">
-                        <p className="character-modal__text">
-                            type: {species}
-                        </p>
-                        <p className="character-modal__text">
-                            species: {type || 'Unknown'}
-                        </p>
-                    </div>
-                    <div className="character-modal__character-descr-item">
-                        <p className="character-modal__text">
-                            origin name: {origin.name}
-                        </p>
-                        <p className="character-modal__text">
-                            location name: {location.name}
-                        </p>
-                    </div>
+                </div>
+                <div className="character-modal__additional-info">
+                    <p className="character-modal__text">
+                        type: {species}
+                    </p>
+                    <p className="character-modal__text">
+                        species: {type || 'Unknown'}
+                    </p>
+                    <p className="character-modal__text">
+                        origin name: {origin.name}
+                    </p>
+                    <p className="character-modal__text">
+                        location name: {location.name}
+                    </p>
                     {episodeList.length === 0 && (
                         <Button classes="character-modal__search-btn" handleClick={handleSearchCharacterEpisodes}>
                             <span className="btn-text">Search episodes</span>
@@ -82,7 +95,7 @@ const CharacterModal = (props) => {
                     {episodeList && episodeList.length > 0 && (
                         <div className="character-modal__character-episode-list">
                             <p className="character-modal__character-episode-list-title">
-                            episodes:
+                                episodes:
                             </p>
                             {episodeList.map(({ episode }) => {
                                 return (

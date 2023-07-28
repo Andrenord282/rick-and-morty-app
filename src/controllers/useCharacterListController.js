@@ -46,19 +46,15 @@ const useCharacterListController = () => {
                         const response = [];
                         results.forEach((result) => {
                             if (result.status === 200) {
-
                                 response.push({
                                     episode: result.data.episode,
                                     name: result.data.name,
                                 });
                             }
                         });
-                        return response
+                        return response;
                     })
-                    .catch((error) => {
-                    });
-            } else {
-                return;
+                    .catch((error) => {});
             }
         } catch (error) {}
     };

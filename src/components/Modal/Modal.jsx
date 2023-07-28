@@ -1,5 +1,5 @@
-//-----react-dom-----//
-import { createPortal } from 'react-dom';
+//-----hooks-----//
+import { useEffect } from 'react';
 
 //-----style-----//
 import './Modal.scss';
@@ -7,7 +7,16 @@ import './Modal.scss';
 const Modal = (props) => {
     const { isOpen, onClose, children } = props;
 
-    return createPortal(
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+    }, [isOpen]);
+
+    return (
         <div
             className={`modal ${isOpen ? 'active' : ''}`}
             onClick={onClose ? onClose : null}>
@@ -15,8 +24,7 @@ const Modal = (props) => {
                 onClick={(e) => e.stopPropagation()}>
                 {children ? children : null}
             </div>
-        </div>,
-        document.getElementById('modal-root'),
+        </div>
     );
 };
 
