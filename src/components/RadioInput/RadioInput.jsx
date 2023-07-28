@@ -50,7 +50,7 @@ const RadioInput = (props) => {
                                 <Icon.Check className="btn-icon" />
                             </Button>
                             <input
-                                id={radioType + value}
+                                id={radioType + '-' + value}
                                 className="radio-input__input"
                                 data-input-role="select-radio"
                                 type="radio"
@@ -59,7 +59,7 @@ const RadioInput = (props) => {
                                 onKeyDown={handlerSetSelect}
                                 onChange={handlerSetSelect} />
                             <label
-                                htmlFor={radioType + value}
+                                htmlFor={radioType + '-' + value}
                                 className="radio-input__label">
                                 <span className="radio-input__text">{value}</span>
                             </label>
