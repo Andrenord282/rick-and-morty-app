@@ -50,7 +50,6 @@ const CharterSearchSpecies = (props) => {
             selectFoundItem={handleUpdateFilterSpecies}
             searchRequest={handleNameRequestCharacterSpecies} />
     );
-
 };
 
 export default CharterSearchSpecies;
