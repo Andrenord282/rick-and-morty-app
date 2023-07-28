@@ -18,7 +18,7 @@ import { selectCharacterListStatus, selectNumberCurremtPage, selectCharacters, s
 import CharacterListPagination from "features/CharacterListPagination";
 
 //-----entities-----//
-import CharacterTable from "entities/CharacterTable";
+import CharacterCard from "entities/CharacterCard";
 
 
 //-----style-----//
@@ -46,7 +46,7 @@ const CharacterList = (props) => {
                     <div className="character-list__content">
                         {characters && characters.length > 0 && characters.map((character) => {
                             return (
-                                <CharacterTable classes='character-list__item' key={character.id} {...character} />
+                                <CharacterCard classes='character-list__item' key={character.id} {...character} />
                             );
                         })}
                         {characterListStatus === 'loaded' && characters.length === 0 && (

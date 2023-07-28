@@ -8,7 +8,20 @@ class RickAndMortyApi {
                     ...query,
                 },
             });
-            
+
+            return response;
+        } catch (error) {
+            return {
+                status: error.response.status,
+                message: error.response.data.error,
+            };
+        }
+    };
+
+    getCharacterEpisode = async (id) => {
+        try {
+            const response = await apiServer.get(`/episode/${id}`);
+
             return response;
         } catch (error) {
             return {

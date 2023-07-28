@@ -1,0 +1,36 @@
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--modal-bt-primary);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s linear;
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: scale(0.5);
+        transition: scale 0.3s linear;
+    }
+
+    &.active {
+        opacity: 1;
+        pointer-events: initial;
+        z-index: 10;
+        
+        & .modal__content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(1);
+            transition: scale 0s linear;
+        }
+    }
+}

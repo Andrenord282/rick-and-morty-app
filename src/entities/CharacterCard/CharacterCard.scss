@@ -1,4 +1,4 @@
-.character-table {
+.character-card {
     display: flex;
     align-items: stretch;
     background-color: var(--component-bg-primary);
@@ -6,7 +6,7 @@
     padding: 15px;
 }
 
-.character-table__character-img {
+.character-card__character-img {
     flex: 0 0 98px;
     height: 98px;
     margin-right: 30px;
@@ -20,33 +20,33 @@
     }
 }
 
-.character-table__ava {
+.character-card__ava {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.character-table__character-descr {
+.character-card__character-descr {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 }
 
-.character-table__title {
+.character-card__title {
     font-size: 24px;
 }
 
-.character-table__character-descr-item {
+.character-card__character-descr-item {
     margin-bottom: 15px;
 }
 
-.character-table__character-descr-item:first-of-type {
+.character-card__character-descr-item:first-of-type {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.character-table__btn {
+.character-card__btn {
     align-self: flex-end;
 }

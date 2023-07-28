@@ -22,10 +22,44 @@ const useCharacterListController = () => {
                 const characters = getObjectFieldValuebyPath('results', response.data);
                 dispatch(characterListActions.initCharacters({ totalPageCount, characters }));
             } else if (response.status === 404) {
-                dispatch(characterListActions.initCharacters({ totalPageCount: 0, characters: [] }));
+                dispatch(
+                    characterListActions.initCharacters({ totalPageCount: 0, characters: [] }),
+                );
             }
 
             dispatch(characterListActions.setCharacterListStatus({ status: 'loaded' }));
+        } catch (error) {}
+    };
+
+    const searchСharacterEpisodes = async (episodes) => {
+        try {
+            const requestList = [];
+
+            if (episodes.length > 0) {
+                for (const episode of episodes) {
+                    const id = episode.replace('https://rickandmortyapi.com/api/episode/', '');
+                    const response = await rickAndMortyApi.getCharacterEpisode(id);
+                    requestList.push(response);
+                }
+                return Promise.all(requestList)
+                    .then((results) => {
+                        const response = [];
+                        results.forEach((result) => {
+                            if (result.status === 200) {
+
+                                response.push({
+                                    episode: result.data.episode,
+                                    name: result.data.name,
+                                });
+                            }
+                        });
+                        return response
+                    })
+                    .catch((error) => {
+                    });
+            } else {
+                return;
+            }
         } catch (error) {}
     };
 
@@ -36,6 +70,7 @@ const useCharacterListController = () => {
 
     return {
         getCharacterList,
+        searchСharacterEpisodes,
         updateNumberCurrentPage,
     };
 };
