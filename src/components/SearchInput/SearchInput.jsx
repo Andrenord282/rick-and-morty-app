@@ -20,19 +20,24 @@ const SearchInput = (props) => {
         labelText,
         placeholder,
         foundList,
-        currentSelectValue,
+        listLehgth,
         resetCurrentSelect,
         setFoundList,
         selectFoundItem,
         searchRequest,
     } = props;
+
     const searchInputBodyRef = useRef(null);
     const searchInputRef = useRef(null);
     const searchInput = useInputChange('');
     const [searchIsLock, setSearchIsLock] = useState(false);
     const debouncedSearchValue = useDebounce(searchInput.value);
 
-    useEventOutside(searchInputBodyRef, () => setFoundList([]));
+    useEventOutside(searchInputBodyRef, () => {
+        if (foundList.length > 0) {
+            setFoundList([]);
+        }
+    });
 
 
     useEffect(() => {
@@ -86,6 +91,10 @@ const SearchInput = (props) => {
             {foundList && foundList.length > 0 && (
                 <div className="searcher-input__found-list">
                     {foundList.map((item, index) => {
+                        if (listLehgth >= index + 1) {
+                            return null;
+                        }
+
                         switch (true) {
                             case item !== 'not found':
                                 return (

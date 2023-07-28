@@ -3,7 +3,7 @@
 import classNames from "classnames";
 
 //-----hooks-----//
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 //-----controllers-----//
 import { useCharacterListController } from "controllers";
@@ -12,10 +12,18 @@ import { useCharacterListController } from "controllers";
 import { useSelector } from "react-redux";
 
 //-----selectors-----//
-import { selectCharacterListStatus, selectNumberCurremtPage, selectCharacters, selectCharacterFilters, } from "store/characterListSlice";
+import {
+    selectCharacterListStatus,
+    selectNumberCurremtPage,
+    selectCharacters,
+    selectCharacterFilters
+} from "store/characterListSlice";
 
 //-----features-----//
 import CharacterListPagination from "features/CharacterListPagination";
+
+//-----components-----//
+import CharacterSkeletonList from "components/CharacterSkeletonList";
 
 //-----entities-----//
 import CharacterCard from "entities/CharacterCard";
@@ -30,7 +38,7 @@ const CharacterList = (props) => {
     const filters = useSelector(selectCharacterFilters);
     const numberCurrentPage = useSelector(selectNumberCurremtPage);
     const characters = useSelector(selectCharacters);
-
+    const memoCharacters = useMemo(() => (characters), [characters]);
     const characterListController = useCharacterListController();
 
     useEffect(() => {
@@ -44,13 +52,22 @@ const CharacterList = (props) => {
             <div className="container character-list__container">
                 <div className="character-list__wrapper">
                     <div className="character-list__content">
-                        {characters && characters.length > 0 && characters.map((character) => {
-                            return (
-                                <CharacterCard classes='character-list__item' key={character.id} {...character} />
-                            );
-                        })}
+                        {characterListStatus === 'loaded' &&
+                            memoCharacters &&
+                            memoCharacters.length > 0 &&
+                            memoCharacters.map((character) => {
+                                return (
+                                    <CharacterCard
+                                        classes='character-list__item'
+                                        key={character.id}
+                                        {...character} />
+                                );
+                            })}
                         {characterListStatus === 'loaded' && characters.length === 0 && (
                             <p className="character-list__error">characters not found</p>
+                        )}
+                        {characterListStatus !== 'loaded' && (
+                            <CharacterSkeletonList classes='character-list__item' count={20} />
                         )}
                     </div>
                     {characters && characters.length > 0 && <CharacterListPagination classes="character-list__pagination" />}

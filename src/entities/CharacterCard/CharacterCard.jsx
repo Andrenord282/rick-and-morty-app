@@ -2,7 +2,7 @@
 import classNames from "classnames";
 
 //-----hooks-----//
-import { useState } from "react";
+import { memo, useState } from "react";
 
 //-----entities-----//
 import CharacterModal from "entities/CharacterModal";
@@ -12,6 +12,7 @@ import Button from "components/Button";
 
 //-----style-----//
 import './CharacterCard.scss';
+
 
 const CharacterCard = (props) => {
     const {
@@ -85,4 +86,4 @@ const CharacterCard = (props) => {
     );
 };
 
-export default CharacterCard;
+export default memo(CharacterCard);

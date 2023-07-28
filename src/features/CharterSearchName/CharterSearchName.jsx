@@ -1,11 +1,8 @@
 //-----modules-----//
 import classNames from "classnames";
 
-//-----utilities-----//
-import { getObjectFieldValuebyPath } from "utilities/getObjectFieldValuebyPath";
-
 //-----hooks-----//
-import { useState } from "react";
+import { memo, useState } from "react";
 
 //-----controllers-----//
 import { useCharacterFilterConroller } from "controllers";
@@ -48,6 +45,7 @@ const CharterSearchName = (props) => {
             classes={classNames(classes)}
             labelText="charter name:"
             placeholder='write the name'
+            listLehgth={10}
             foundList={foundCharacterName}
             resetCurrentSelect={handleUpdateFilterName}
             setFoundList={setFoundCharacterName}
@@ -57,4 +55,4 @@ const CharterSearchName = (props) => {
 
 };
 
-export default CharterSearchName;
+export default memo(CharterSearchName);

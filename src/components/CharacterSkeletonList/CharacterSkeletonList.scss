@@ -1,0 +1,25 @@
+.character-skeleton {
+    display: flex;
+    align-items: flex-start;
+    padding: 4px;
+}
+
+.character-skeleton__img {
+    flex: 0 0 66px;
+    height: 66px;
+    margin-right: 20px;
+}
+
+.character-skeleton__descr {
+    flex-grow: 1;
+}
+
+.character-skeleton__descr-item:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.character-skeleton__descr-item:last-child {
+    width: 95px;
+    height: 40px;
+    margin-left: auto;
+}

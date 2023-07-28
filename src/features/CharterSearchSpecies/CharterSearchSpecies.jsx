@@ -22,7 +22,7 @@ const CharterSearchSpecies = (props) => {
             const results = response.data.results.map((item) => {
                 return item.species;
             });
-            console.log(results)
+            console.log(results);
             const uniqResults = Array.from(new Set(results));
 
             setFoundCharacterSpecies(uniqResults);
@@ -42,6 +42,7 @@ const CharterSearchSpecies = (props) => {
             classes={classNames(classes)}
             labelText="charter species:"
             placeholder='write a species'
+            listLehgth={10}
             foundList={foundCharacterSpecies}
             fieldIdFoundItemPath="id"
             fieldValueFoundItemPath='name'
