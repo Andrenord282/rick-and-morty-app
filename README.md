@@ -1,18 +1,24 @@
-# Getting Started with Create React App
+# rick-and-morty-app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Задание
+Используя [Rick and Morty API](https://rickandmortyapi.com/), реализуйте веб-приложение со следующими функциями:
 
-In the project directory, you can run:
+- Пользователь может удобно просматривать всех персонажей и информацию о них (имя, статус, гендер), предоставляемые API.
+- Можно фильтровать персонажей по имени, статусу, виду, типу и полу.
+- Вышеуказанные фильтры могут применяться все вместе.
+- Пользователь может открыть всплывающее окно (popup) с полной информацией о персонаже.
 
-### `npm start`
+## Технические требования
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Приложение написано на React.
+- Приложение работает в современных браузерах (последние версии Chrome и Safari).
+Поэтому использование новейших технологий и шаблонов проектирования приветствуется.
+- Не использовано сторонних библиотек с готовыми компонентами.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+
+
 
 ### `npm test`
 
